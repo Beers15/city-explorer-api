@@ -6,8 +6,15 @@ app.use(cors());
 require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 
+class Forecast {
+  constructor(low_temp, high_temp, weatherDescription, date) {
+    this.description = 'Low of ' + low_temp + ', high of ' + high_temp + ', with ' + weatherDescription;
+    this.date = date;
+  }
+}
+
 app.get('/weather', (req, res) => {
-  const entry = weatherData.find(element => {
+  const weatherEntries = weatherData.find(element => {
     if(element.city_name.toLowerCase() === req.query.searchQuery) {
       return element;
     }
@@ -16,13 +23,14 @@ app.get('/weather', (req, res) => {
     }
   });
 
-  if(!entry) {
+  if(!weatherEntries) {
     res.send({err: 'The entered values did not match any city with forecastable weather.'});
   } else {
+    const forecasts = weatherEntries.data.map(entry => {
+      return new Forecast(entry.low_temp, entry.high_temp, entry.weather.description, entry.datetime);
+    });
     res.send({
-      description: 'Low of ' + entry.data[0].low_temp + ', high of ' + entry.data[0].high_temp
-                             + ', with ' + entry.data[0].weather.description,
-      date: entry.data[0].datetime,
+      forecasts
     });
   }
 });
