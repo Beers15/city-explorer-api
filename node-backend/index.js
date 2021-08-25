@@ -13,6 +13,18 @@ class Forecast {
   }
 }
 
+class Movie {
+  constructor(movieObj) {
+    this.title = movieObj.title;
+    this.overview = movieObj.overview;
+    this.average_votes = movieObj.average_votes;
+    this.total_views = movieObj.total_views;
+    this.image_url = 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/' + movieObj.image_url;
+    this.popularity = movieObj.popularity;
+    this.released_on = movieObj.released_on;
+  }
+}
+
 app.get('/weather', async (req, res) => {
   const API = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&lat=${req.query.lat}&lon=${req.query.lon}`;
 
@@ -33,8 +45,30 @@ app.get('/weather', async (req, res) => {
   });
 });
 
+app.get('/movies', async (req, res) => {
+  const API = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1&include_adult=false&query=${req.query.query}`;
+
+  let matches = await axios.get(API).then(res => {
+    return res.data;
+  }).catch((err) => {
+    console.log(err);
+    sendErrorResult(res);
+  });
+  if(!matches) {
+    return;
+  }
+
+  let movies = matches.data.map(movie => {
+    return new Movie(movie.title, movie.overview, movie.vote_average, movie.vote_count, movie.poster_path, movie.popularity, movie.release_date);
+  });
+  movies = movies.slice(0, 20);
+  res.send({
+    movies
+  });
+});
+
 const sendErrorResult = (res) => {
-  return res.status(500).send({'error': 'Unable to fetch weather forecasts for the given location. Please try a different location to recieve weather data.'});
+  return res.status(500).send({'error': 'Unable to fetch data for the given location. Please try a different location.'});
 };
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
