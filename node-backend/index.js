@@ -24,7 +24,7 @@ app.get('/weather', (req, res) => {
   });
 
   if(!weatherEntries) {
-    res.send(sendErrorResult());
+    sendErrorResult(res);
   } else {
     const forecasts = weatherEntries.data.map(entry => {
       return new Forecast(entry.low_temp, entry.high_temp, entry.weather.description, entry.datetime);
@@ -35,11 +35,8 @@ app.get('/weather', (req, res) => {
   }
 });
 
-const sendErrorResult = () => {
-  return {
-    'status': 500,
-    'error': 'Unable to fetch weather forecasts for the given location. Please try a different location to recieve weather data.',
-  };
+const sendErrorResult = (res) => {
+  return res.status(500).send({'error': 'Unable to fetch weather forecasts for the given location. Please try a different location to recieve weather data.',})
 };
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
