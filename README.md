@@ -13,6 +13,7 @@ To run the backend of this application: Clone repo and install dependencies by r
 
 ## Architecture
 Node.js, express
+![Data Flow Diagram](DataFlow.jpg)
 
 ## Change Log
 08-23-2021 12:40pm - Initialize application with necessary packages and files.
