@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const weatherData = require('./data/weather.json');
+const axios = require('axios');
 const cors = require('cors');
 app.use(cors());
 require('dotenv').config();
@@ -13,30 +13,28 @@ class Forecast {
   }
 }
 
-app.get('/weather', (req, res) => {
-  const weatherEntries = weatherData.find(element => {
-    if(element.city_name.toLowerCase() === req.query.searchQuery) {
-      return element;
-    }
-    else if(element.lat === req.query.lat && element.lon === req.query.lon) {
-      return element;
-    }
-  });
+app.get('/weather', async (req, res) => {
+  const API = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&lat=${req.query.lat}&lon=${req.query.lon}`;
 
-  if(!weatherEntries) {
+  let matches = await axios.get(API).then(res => {
+    return res.data;
+  }).catch(() => {
     sendErrorResult(res);
-  } else {
-    const forecasts = weatherEntries.data.map(entry => {
-      return new Forecast(entry.low_temp, entry.high_temp, entry.weather.description, entry.datetime);
-    });
-    res.send({
-      forecasts
-    });
+  });
+  if(!matches) {
+    return;
   }
+
+  const forecasts = matches.data.map(entry => {
+    return new Forecast(entry.low_temp, entry.high_temp, entry.weather.description, entry.datetime);
+  });
+  res.send({
+    forecasts
+  });
 });
 
 const sendErrorResult = (res) => {
-  return res.status(500).send({'error': 'Unable to fetch weather forecasts for the given location. Please try a different location to recieve weather data.',})
+  return res.status(500).send({'error': 'Unable to fetch weather forecasts for the given location. Please try a different location to recieve weather data.'});
 };
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
