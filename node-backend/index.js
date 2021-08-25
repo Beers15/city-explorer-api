@@ -55,12 +55,24 @@ app.get('/movies', async (req, res) => {
     sendErrorResult(res);
   });
   if(!matches) {
-    return;
+    //if a successful axios call doesn't return any results
+    sendErrorResult(res);
   }
 
-  let movies = matches.data.map(movie => {
-    return new Movie(movie.title, movie.overview, movie.vote_average, movie.vote_count, movie.poster_path, movie.popularity, movie.release_date);
+  let movies = matches.results.map(movie => {
+    const movieObj = {
+      title: movie.title,
+      overview: movie.overview,
+      average_votes: movie.vote_average,
+      total_views: movie.vote_count,
+      image_url: movie.poster_path,
+      popularity: movie.popularity,
+      released_on: movie.release_date
+    };
+
+    return new Movie(movieObj);
   });
+
   movies = movies.slice(0, 20);
   res.send({
     movies
