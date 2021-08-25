@@ -24,7 +24,7 @@ app.get('/weather', (req, res) => {
   });
 
   if(!weatherEntries) {
-    res.send({err: 'The entered values did not match any city with forecastable weather.'});
+    res.send(sendErrorResult());
   } else {
     const forecasts = weatherEntries.data.map(entry => {
       return new Forecast(entry.low_temp, entry.high_temp, entry.weather.description, entry.datetime);
@@ -34,5 +34,12 @@ app.get('/weather', (req, res) => {
     });
   }
 });
+
+const sendErrorResult = () => {
+  return {
+    'status': 500,
+    'error': 'Unable to fetch weather forecasts for the given location. Please try a different location to recieve weather data.',
+  };
+};
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
