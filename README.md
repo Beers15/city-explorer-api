@@ -3,7 +3,7 @@
 ### Netlify link: This app can be found [here](https://nervous-mclean-43f026.netlify.app/)
 
 **Author**: Alexander Beers
-**Version**: 1.4.2
+**Version**: 1.3.2
 
 ## Overview
 API server for the City explorer Application
@@ -32,7 +32,9 @@ Node.js, express, [TMDB Movie API](https://developers.themoviedb.org/3/getting-s
 
 08-25-2021 4:45pm - Add GET /movies route handler that grabs movie data from request location and response with movie info. This api uses TMDB's movie API.
 
-08-25-2021 5:15pm - Finish fixing issues involving responding with error messages to client upon unsuccessful calls to API endpoint."
+08-25-2021 5:15pm - Finish fixing issues involving responding with error messages to client upon unsuccessful calls to API endpoint.
+
+08-26-2021 1:00pm - Seperate movies and weather fetching logic into their own modules.
 
 ## Credit and Collaborations
 N/A
@@ -65,6 +67,6 @@ Estimate of time needed to complete: 3hr
 
 Start time: 1:45
 
-Finish time: 5:12
+Finish time: 5:15
 
-Actual time needed to complete: 3hrs 27m
+Actual time needed to complete: 3hrs 30m
