@@ -37,10 +37,7 @@ Node.js, express, [TMDB Movie API](https://developers.themoviedb.org/3/getting-s
 ## Credit and Collaborations
 N/A
 
---------
-
-
-Name of feature: Weather - Allow user to see weather info on entered city
+----------
 
 Estimate of time needed to complete: 1hr 30m
 
