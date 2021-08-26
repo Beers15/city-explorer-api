@@ -19,7 +19,7 @@ class Movie {
     this.overview = movieObj.overview;
     this.average_votes = movieObj.average_votes;
     this.total_views = movieObj.total_views;
-    this.image_url = 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/' + movieObj.image_url;
+    this.image_url = 'https://www.themoviedb.org/t/p/w100_and_h100_bestv2/' + movieObj.image_url;
     this.popularity = movieObj.popularity;
     this.released_on = movieObj.released_on;
   }
@@ -30,8 +30,8 @@ app.get('/weather', async (req, res) => {
 
   let matches = await axios.get(API).then(res => {
     return res.data;
-  }).catch(() => {
-    sendErrorResult(res);
+  }).catch(err => {
+    sendErrorResult(res, err.response.status);
   });
   if(!matches) {
     return;
@@ -48,15 +48,20 @@ app.get('/weather', async (req, res) => {
 app.get('/movies', async (req, res) => {
   const API = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1&include_adult=false&query=${req.query.query}`;
 
+  if(req.query.query === '') {
+    return sendErrorResult(res, 404);
+  }
+
   let matches = await axios.get(API).then(res => {
     return res.data;
   }).catch((err) => {
     console.log(err);
-    sendErrorResult(res);
+    return sendErrorResult(res, err.response.status);
+
   });
-  if(!matches) {
+  if(matches.results.length === 0) {
     //if a successful axios call doesn't return any results
-    sendErrorResult(res);
+    return sendErrorResult(res, 404);
   }
 
   let movies = matches.results.map(movie => {
@@ -79,8 +84,8 @@ app.get('/movies', async (req, res) => {
   });
 });
 
-const sendErrorResult = (res) => {
-  return res.status(500).send({'error': 'Unable to fetch data for the given location. Please try a different location.'});
+const sendErrorResult = (res, statusCode) => {
+  return res.status(statusCode).send({'error': 'Unable to fetch data for the given location. Please try a different location.'});
 };
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
