@@ -39,6 +39,8 @@ N/A
 
 ----------
 
+Name of feature: Allow user to see weather info on entered city
+
 Estimate of time needed to complete: 1hr 30m
 
 Start time: 3:00
