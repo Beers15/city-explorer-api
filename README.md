@@ -1,4 +1,5 @@
 # City Explorer API
+
 ### [Heroku link]()
 
 **Author**: Alexander Beers
@@ -13,6 +14,7 @@ To run the frontend of this application please refer to the README for that port
 To run the backend of this application: Clone repo and install dependencies by running "npm i" command in the project's folder. Then run the "node index.js" command to start the API server.  
 
 ## Architecture
+
 Node.js, express, [TMDB Movie API](https://developers.themoviedb.org/3/getting-started/introduction), [weatherbit.io](https://www.weatherbit.io/)
 
 ![Data Flow Diagram](City-explorer-api-dataflow.jpg)
@@ -45,7 +47,7 @@ Finish time: 4:40
 
 Actual time needed to complete: 1hr 30m
 
-Name of feature: Display detailed errors to user if anything goes wrong
+Name of feature: Display detailed errors to user if anything goes wrong, style application
 
 Estimate of time needed to complete: 30m
 
@@ -64,3 +66,9 @@ Start time: 1:45
 Finish time: 5:12
 
 Actual time needed to complete: 3hrs 27m
+=======
+
+Finish time: 6:15
+
+Actual time needed to complete: 1hr 30m 
+
