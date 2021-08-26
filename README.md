@@ -70,3 +70,13 @@ Start time: 1:45
 Finish time: 5:15
 
 Actual time needed to complete: 3hrs 30m
+
+Name of feature: Componentize the front-end codebase modules.
+
+Estimate of time needed to complete: 1hr
+
+Start time: 12:45
+
+Finish time: 12:40
+
+Actual time needed to complete: 55m
