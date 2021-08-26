@@ -40,7 +40,7 @@ N/A
 --------
 
 
-Name of feature: Allow user to see weather info on entered city
+Name of feature: Weather - Allow user to see weather info on entered city
 
 Estimate of time needed to complete: 1hr 30m
 
@@ -50,7 +50,7 @@ Finish time: 4:40
 
 Actual time needed to complete: 1hr 30m
 
-Name of feature: Display detailed errors to user if anything goes wrong, style application
+Name of feature: Errors - Display detailed errors to user if anything goes wrong, style application
 
 Estimate of time needed to complete: 30m
 
@@ -69,7 +69,3 @@ Start time: 1:45
 Finish time: 5:12
 
 Actual time needed to complete: 3hrs 27m
-
-Finish time: 6:15
-
-Actual time needed to complete: 1hr 30m 
