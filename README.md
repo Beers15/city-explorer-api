@@ -81,12 +81,12 @@ Finish time: 12:40
 
 Actual time needed to complete: 55m
 
-### Name of feature: Add a lovsl cache to the app to avoid unnecessary API if cache data is recent enough
+### Name of feature: Add a local cache to the app to avoid unnecessary API calls query is cached and recent enough
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1hr 30m
 
-Start time: 
+Start time: 2:30
 
-Finish time: 
+Finish time: 3:45
 
-Actual time needed to complete: 
+Actual time needed to complete: 1hr 15m
