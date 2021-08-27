@@ -17,7 +17,7 @@ To run the backend of this application: Clone repo and install dependencies by r
 
 Node.js, express, [TMDB Movie API](https://developers.themoviedb.org/3/getting-started/introduction), [weatherbit.io](https://www.weatherbit.io/)
 
-![Data Flow Diagram](City-explorer-api-dataflow.jpg)
+![Data Flow Diagram](City-Explorer-Api-Dataflow.jpg)
 
 ## Change Log
 08-23-2021 12:40pm - Initialize application with necessary packages and files.
