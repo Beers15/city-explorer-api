@@ -41,7 +41,7 @@ N/A
 
 ----------
 
-Name of feature: Allow user to see weather info on entered city
+### Name of feature: Allow user to see weather info on entered city
 
 Estimate of time needed to complete: 1hr 30m
 
@@ -51,7 +51,7 @@ Finish time: 4:40
 
 Actual time needed to complete: 1hr 30m
 
-Name of feature: Errors - Display detailed errors to user if anything goes wrong, style application
+### Name of feature: Errors - Display detailed errors to user if anything goes wrong, style application
 
 Estimate of time needed to complete: 30m
 
@@ -61,7 +61,7 @@ Finish time: 6:15
 
 Actual time needed to complete: 1hr 30m
 
-Name of feature: Movies - Get movies related to the entered city.
+### Name of feature: Movies - Get movies related to the entered city.
 
 Estimate of time needed to complete: 3hr
 
@@ -71,7 +71,7 @@ Finish time: 5:15
 
 Actual time needed to complete: 3hrs 30m
 
-Name of feature: Componentize the front-end codebase modules.
+### Name of feature: Componentize the front-end codebase modules.
 
 Estimate of time needed to complete: 1hr
 
@@ -80,3 +80,13 @@ Start time: 12:45
 Finish time: 12:40
 
 Actual time needed to complete: 55m
+
+### Name of feature: Add a lovsl cache to the app to avoid unnecessary API if cache data is recent enough
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: 
+
+Actual time needed to complete: 
