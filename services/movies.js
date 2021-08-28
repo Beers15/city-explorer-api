@@ -29,7 +29,7 @@ const fetchMovies = async (req, res) => {
 
   const API = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1&include_adult=false&query=${req.query.query}`;
 
-  if(req.query.query === '') {
+  if(!query) {
     return sendErrorResult(res, 404);
   }
 

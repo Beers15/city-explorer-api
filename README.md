@@ -3,7 +3,7 @@
 ### Netlify link: This app can be found [here](https://nervous-mclean-43f026.netlify.app/)
 
 **Author**: Alexander Beers
-**Version**: 1.3.2
+**Version**: 1.5.0
 
 ## Overview
 API server for the City explorer Application
@@ -30,11 +30,15 @@ Node.js, express, [TMDB Movie API](https://developers.themoviedb.org/3/getting-s
 
 08-25-2021 3:00pm - Refactor GET /weather route handler to use weatherbit.io's weather API instead of grab data from a local json file.
 
-08-25-2021 4:45pm - Add GET /movies route handler that grabs movie data from request location and response with movie info. This api uses TMDB's movie API.
+08-25-2021 4:45pm - Add GET /movies route handler that grabs movie data from request location and responds with movie info. This api uses TMDB's movie API.
 
 08-25-2021 5:15pm - Finish fixing issues involving responding with error messages to client upon unsuccessful calls to API endpoint.
 
 08-26-2021 1:00pm - Seperate movies and weather fetching logic into their own modules.
+
+08-27-2021 2:15pm - Add a local cache to the app to avoid unnecessary API calls if cached data is recent enough
+
+08-27-2021 5:30pm - Add GET /restaurants route handler that grabs restaurant data from yelp api based on entered location and responds with restaurant info.
 
 ## Credit and Collaborations
 N/A
@@ -81,7 +85,7 @@ Finish time: 12:40
 
 Actual time needed to complete: 55m
 
-### Name of feature: Add a local cache to the app to avoid unnecessary API calls query is cached and recent enough
+### Name of feature: Add a local cache to the app
 
 Estimate of time needed to complete: 1hr 30m
 
@@ -90,3 +94,13 @@ Start time: 2:30
 Finish time: 3:45
 
 Actual time needed to complete: 1hr 15m
+
+### Name of feature: Restaurants - Get restaurants related to the entered city.
+
+Estimate of time needed to complete: 1hr
+
+Start time: 4:00
+
+Finish time: 5:30m
+
+Actual time needed to complete: 1hr 30m
