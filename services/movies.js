@@ -14,7 +14,7 @@ class Movie {
 }
 
 const fetchMovies = async (req, res) => {
-  const query = req.query.query;
+  const query = req.query.query + ' movies';
 
   /*If cached, if our cache entry is older than 10 minutes, don't use the value from
     the cache, otherwise send the value from cache and don't obtain from API */
@@ -29,7 +29,7 @@ const fetchMovies = async (req, res) => {
 
   const API = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1&include_adult=false&query=${req.query.query}`;
 
-  if(!query) {
+  if(!req.query.query) {
     return sendErrorResult(res, 404);
   }
 
@@ -38,7 +38,6 @@ const fetchMovies = async (req, res) => {
   }).catch((err) => {
     console.log(err);
     return sendErrorResult(res, err.response.status);
-
   });
   if(matches.results.length === 0) {
     //if a successful axios call doesn't return any results
