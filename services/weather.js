@@ -1,4 +1,5 @@
 const axios = require('axios');
+const cache = require('../cache');
 
 class Forecast {
   constructor(low_temp, high_temp, weatherDescription, date) {
@@ -8,6 +9,19 @@ class Forecast {
 }
 
 const fetchWeather = async (req, res) => {
+  const query = req.query.lat + req.query.lon;
+
+  /*If cached, if our cache entry is older than 10 minutes, don't use the value from
+    the cache, otherwise send the value from cache and don't obtain from API */
+  if(cache[query] && (((Date.now() - cache[query].time) / 1000) < 360)) {
+    cache.time = Date.now();
+    console.log('Weather cache hit');
+    res.send(cache[query]);
+    return;
+  } else {
+    console.log('Weather cache miss');
+  }
+
   const API = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&lat=${req.query.lat}&lon=${req.query.lon}`;
 
   let matches = await axios.get(API).then(res => {
@@ -22,6 +36,11 @@ const fetchWeather = async (req, res) => {
   const forecasts = matches.data.map(entry => {
     return new Forecast(entry.low_temp, entry.high_temp, entry.weather.description, entry.datetime);
   });
+
+  //update cache with successful movie query
+  cache[query] = { forecasts };
+  cache[query].time = Date.now();
+
   res.send({
     forecasts
   });

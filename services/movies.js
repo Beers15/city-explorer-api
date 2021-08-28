@@ -1,4 +1,5 @@
 const axios = require('axios');
+const cache = require('../cache');
 
 class Movie {
   constructor(movieObj) {
@@ -13,9 +14,22 @@ class Movie {
 }
 
 const fetchMovies = async (req, res) => {
+  const query = req.query.query;
+
+  /*If cached, if our cache entry is older than 10 minutes, don't use the value from
+    the cache, otherwise send the value from cache and don't obtain from API */
+  if(cache[query] && (((Date.now() - cache[query].time) / 1000) < 360)) {
+    cache.time = Date.now();
+    console.log('Movie cache hit');
+    res.send(cache[query]);
+    return;
+  } else {
+    console.log('Movie cache miss');
+  }
+
   const API = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&page=1&include_adult=false&query=${req.query.query}`;
 
-  if(req.query.query === '') {
+  if(!query) {
     return sendErrorResult(res, 404);
   }
 
@@ -45,6 +59,10 @@ const fetchMovies = async (req, res) => {
     return new Movie(movieObj);
   });
 
+  //update cache with successful movie query
+  cache[query] = { movies };
+  cache[query].time = Date.now();
+
   movies = movies.slice(0, 20);
   res.send({
     movies
@@ -55,6 +73,4 @@ const sendErrorResult = (res, statusCode) => {
   return res.status(statusCode).send({'error': 'Unable to fetch movie data for the given location. Please try a different location.'});
 };
 
-module.exports = {
-  fetchMovies
-};
+module.exports = { fetchMovies };
