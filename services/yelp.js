@@ -11,7 +11,7 @@ class Restaurant {
 }
 
 const fetchRestaurants = async (req, res) => {
-  const query = req.query.query;
+  const query = req.query.query + 'restaurants';
 
   /*If cached, if our cache entry is older than 10 minutes, don't use the value from
     the cache, otherwise send the value from cache and don't obtain from API */
